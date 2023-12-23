@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('phonebook', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name', 100);
-            $table->integer('contact_number');
-            $table->timestamps();
+        Schema::table('phonebook', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('phonebook');
+        Schema::table('phonebook', function (Blueprint $table) {
+            //
+        });
     }
 };

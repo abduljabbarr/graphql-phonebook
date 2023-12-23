@@ -3,15 +3,15 @@ scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date
 
 "Indicates what fields are available at the top level of a query operation."
 type Query {
-  viewContact: [Contact] @all
+  listContacts: [Contact] @all
+  viewContact(id: ID! @eq): Contact! @find
 }
 
 
 type Mutation{
-  createContact(
-    name: String!
-    contact_number: String!
-  ): Contact! @create
+  createContact(name: String! contact_number: String! ): Contact! @create
+  updateContact(id: ID!, name: String, contact_number: String): Contact! @update
+  deleteContact(id: ID! @whereKey): Contact! @delete
 
 }
 
@@ -19,5 +19,4 @@ type Contact{
   id: ID!
   name: String!
   contact_number: String!
-  is_deleted: Boolean!
 }
