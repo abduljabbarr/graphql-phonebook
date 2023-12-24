@@ -1,0 +1,26 @@
+extend type Mutation @guard @auth{
+  createUser(name: String!, email: String! @rules(apply: ["email"]), password: String! @rules(apply: ["min:8"])): User! @create
+  updateUser(id: ID!, name: String, email: String, password: String): User! @update
+  deleteUser(id: ID! @whereKey): User! @delete
+
+
+}
+
+extend type Query @guard @auth{
+    users: [User!]! @paginate(defaultCount: 20)
+    viewUser(id: ID! @eq): User! @find
+
+}
+
+type UsersPaginator {
+    data: [User!]!
+    paginatorInfo: PaginatorInfo!
+}
+
+
+type User{
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+}

@@ -1,22 +1,5 @@
-"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
-scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
-
-"Indicates what fields are available at the top level of a query operation."
-type Query {
-  listContacts: [Contact] @all
-  viewContact(id: ID! @eq): Contact! @find
-}
 
 
-type Mutation{
-  createContact(name: String! contact_number: String! ): Contact! @create
-  updateContact(id: ID!, name: String, contact_number: String): Contact! @update
-  deleteContact(id: ID! @whereKey): Contact! @delete
-
-}
-
-type Contact{
-  id: ID!
-  name: String!
-  contact_number: String!
-}
+#import user.graphql
+#import contact.graphql
+#import auth.graphql

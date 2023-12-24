@@ -1,0 +1,23 @@
+
+type Query @guard @auth{
+  listContacts: [Contact!]! @paginate(defaultCount: 20)
+  viewContact(id: ID! @eq): Contact! @find
+}
+
+
+extend type Mutation @guard @auth{
+  createContact(name: String! contact_number: String! @rules(apply: ["max:12"]) ): Contact! @create
+  updateContact(id: ID!, name: String, contact_number: String): Contact! @update
+  deleteContact(id: ID! @whereKey): Contact! @delete
+}
+
+type listContactsPaginator{
+  data: [Contact!]!
+  paginatorInfo: PaginatorInfo!
+}
+
+type Contact{
+  id: ID!
+  name: String!
+  contact_number: String!
+}
