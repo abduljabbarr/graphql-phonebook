@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('phonebook', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100);
-            $table->integer('contact_number');
+            $table->string('contact_number');
             $table->timestamps();
         });
     }
